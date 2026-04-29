@@ -6,6 +6,15 @@ This repository is developed on top of [OpenPI](https://github.com/Physical-Inte
 
 ## Training π₀.₅ on YAM
 
+### 0. Installation
+
+```bash
+GIT_LFS_SKIP_SMUDGE=1 uv sync
+GIT_LFS_SKIP_SMUDGE=1 uv pip install -e .
+```
+
+Python 3.11+ is required.
+
 ### 1. Dataset format
 
 Training uses the [LeRobot](https://github.com/huggingface/lerobot) dataset format. Your dataset must contain the following keys:
@@ -181,7 +190,7 @@ rd infer \
   --action_hz 50.0 \
   --host localhost --port 8000 \
   --action_horizon 50 \
-  --prompt "pick up the lock and put it into the box"
+  --prompt "<my prompt>"
 ```
 
 The bridge ([deployment/openpi_bridge.py](deployment/openpi_bridge.py)) handles the joint-order difference between raiden and OpenPI:
@@ -189,13 +198,3 @@ The bridge ([deployment/openpi_bridge.py](deployment/openpi_bridge.py)) handles 
 - **Raiden 14D**: `[right_joint(6), right_grip(1), left_joint(6), left_grip(1)]`
 
 ---
-
-## Installation
-
-```bash
-pip install uv
-uv sync              # CPU / default
-uv sync --extra cuda12   # CUDA 12 JAX support
-```
-
-Python 3.11+ is required.
